@@ -1,0 +1,14 @@
+# Ignorar carpetas grandes o generadas automáticamente
+models/
+signals/
+__pycache__/
+
+# Archivos temporales o de entorno
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Archivos de entorno virtual (si existieran)
+venv/
+.env/
