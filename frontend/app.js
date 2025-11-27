@@ -1,7 +1,3 @@
-/**
- * Frontend – Clasificador STC con Sistema Dual
- */
-
 const API_BASE = 'http://localhost:5000/api';
 
 // Estado
@@ -49,7 +45,7 @@ function setupEventListeners() {
   elements.btnUpload.addEventListener('click', uploadSelectedFiles);
 }
 
-// ---- Modo de Clasificación ----
+// Modo de Clasificación
 function handleModeChange(e) {
   const mode = e.target.value;
   appState.mode = mode;
@@ -90,7 +86,7 @@ function handleModeChange(e) {
   updateClassifyButton();
 }
 
-// ---- Modelos ----
+// Modelos
 async function loadModels() {
   try {
     const response = await fetch(`${API_BASE}/models`);
@@ -141,7 +137,7 @@ function handleModelSelection(e) {
   updateClassifyButton();
 }
 
-// ---- Señales ----
+// Señales
 async function loadSignals() {
   elements.signalList.innerHTML = '<div class="loading"><div class="spinner"></div><p>Cargando señales...</p></div>';
   try {
@@ -201,7 +197,7 @@ function toggleSignalSelection(signal, isSelected) {
   updateClassifyButton();
 }
 
-// ---- Subir archivos ----
+// Subir archivos
 async function uploadSelectedFiles() {
   const files = elements.fileInput.files;
   if (!files || files.length === 0) {
@@ -233,7 +229,7 @@ async function uploadSelectedFiles() {
   }
 }
 
-// ---- Clasificar ----
+// Clasificar
 function updateClassifyButton() {
   let canClassify = false;
 
@@ -286,7 +282,7 @@ async function classifySignals() {
   }
 }
 
-// ---- Render resultados ----
+// Render resultados
 function displayResults(data) {
   const { mode, results } = data;
 

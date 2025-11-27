@@ -1,15 +1,3 @@
-"""
-Backend Flask para clasificación binaria de movimientos de riesgo STC
-Proyecto: Herramienta para clasificación de movimientos asociados al STC
-Autor: Karen Nicolle Arango Valencia
-Universidad: Pontificia Universidad Javeriana - Cali
-
-VERSIÓN CON SISTEMA DUAL:
-- Modo Independiente: Un solo modelo (ML o DL)
-- Modo Dual: RandomForest + Ensemble_KNN en cascada
-Pipeline: Butterworth + Notch → Z-score → Ventanas → Features/Secuencias → Predicción
-"""
-
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from pathlib import Path
@@ -19,7 +7,7 @@ import json
 from scipy.io import loadmat
 from scipy import signal as scipy_signal
 from werkzeug.utils import secure_filename
-import tensorflow.keras.backend as K
+import tensorflow.keras.backend as K # type: ignore
 import tensorflow as tf
 from tensorflow import keras
 import pywt
@@ -27,7 +15,6 @@ import os
 
 os.environ['KERAS_BACKEND'] = 'tensorflow'
 keras.config.enable_unsafe_deserialization()
-print("⚙️  Unsafe deserialization habilitada para Lambda layers")
 
 app = Flask(__name__, static_folder=None)
 CORS(app)
@@ -66,12 +53,9 @@ MODELS_DIR = BASE_DIR / 'models'
 EXTERNAL_SIGNALS_DIR = Path(r'C:\Users\karen\Desktop\ninaproV5\DB2_E1_only\test')
 UPLOADS_DIR = BASE_DIR / 'signals'
 FRONTEND_DIR = BASE_DIR / 'frontend'
-
-ALLOWED_EXT = {'.mat'}
-
-# Variable global para cachear configuración del sistema dual
 DUAL_SYSTEM_CONFIG = None
 OPTIMIZED_THRESHOLDS = None 
+ALLOWED_EXT = {'.mat'}
 
 # ============================================================================
 # PREPROCESAMIENTO - IDÉNTICO AL COLAB
@@ -110,7 +94,6 @@ def attention_sum(x):
     """Función nombrada para reemplazar lambda en atención"""
     return K.sum(x, axis=1)
 
-# Custom objects para deserializar modelos
 CUSTOM_OBJECTS = {
     'attention_sum': attention_sum
 }
@@ -725,20 +708,20 @@ if __name__ == '__main__':
     FRONTEND_DIR.mkdir(exist_ok=True)
     
     print("\n" + "="*70)
-    print("🚀 SERVIDOR CLASIFICADOR STC - CON SISTEMA DUAL")
+    print("SERVIDOR CLASIFICADOR STC")
     print("="*70)
-    print(f"\n📂 Rutas: {MODELS_DIR}")
-    print(f"⚙️  Window: {cfg.WINDOW_SIZE}ms, Overlap: {cfg.OVERLAP*100:.0f}%")
+    print(f"\n Rutas: {MODELS_DIR}")
+    print(f" Window: {cfg.WINDOW_SIZE}ms, Overlap: {cfg.OVERLAP*100:.0f}%")
     
     dual_config = load_dual_system_config()
     if dual_config and dual_config.get('available'):
-        print(f"\n🔥 Sistema Dual DISPONIBLE:")
+        print(f"\n Sistema Dual DISPONIBLE:")
         print(f"   SAFE: {dual_config['safe_specialist']['name']} (precision {dual_config['safe_specialist']['precision']:.3f})")
         print(f"   RISK: {dual_config['risk_specialist']['name']} (recall {dual_config['risk_specialist']['recall']:.3f})")
     else:
-        print(f"\n⚠️  Sistema Dual NO disponible")
+        print(f"\n⚠️ Sistema Dual NO disponible")
     
-    print(f"\n🌐 http://localhost:5000")
+    print(f"\n http://localhost:5000")
     print("="*70 + "\n")
     
     app.run(debug=True, host='0.0.0.0', port=5000)

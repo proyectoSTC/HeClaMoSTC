@@ -1,6 +1,6 @@
 # Ignorar carpetas grandes o generadas automáticamente
-models/
 signals/
+models/
 __pycache__/
 
 # Archivos temporales o de entorno

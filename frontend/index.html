@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -181,9 +182,12 @@
     }
 
     @keyframes pulse {
-      0%, 100% {
+
+      0%,
+      100% {
         box-shadow: 0 4px 12px rgba(255, 107, 107, .4);
       }
+
       50% {
         box-shadow: 0 8px 24px rgba(255, 107, 107, .8);
       }
@@ -237,8 +241,13 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0) }
-      100% { transform: rotate(360deg) }
+      0% {
+        transform: rotate(0)
+      }
+
+      100% {
+        transform: rotate(360deg)
+      }
     }
 
     .loading {
@@ -288,26 +297,26 @@
 <body>
   <div class="container">
     <header>
-      <h1>🤖 Clasificador de Movimientos STC</h1>
+      <h1>🤖 Herramienta de Clasificación de Movimientos STC - HeClaMoSTC</h1>
       <p class="subtitle">Sistema de Detección de Movimientos de Riesgo para Síndrome del Túnel Carpiano</p>
     </header>
 
     <!-- Panel de Modo -->
     <div class="panel">
-      <h2 class="panel-title">🔧 Modo de Clasificación</h2>
-      
+      <h2 class="panel-title">Modo de Clasificación</h2>
+
       <div class="control-group">
         <label for="classificationMode">Seleccionar Modo:</label>
         <select id="classificationMode">
           <option value="">-- Seleccionar modo --</option>
           <option value="single">Modelo Independiente</option>
-          <option value="dual">Sistema Dual (Recomendado) 🔥</option>
+          <option value="dual">Sistema Dual</option>
         </select>
       </div>
 
       <div id="dualInfo" style="display:none;">
         <div class="info-box">
-          <strong>🔥 Sistema Dual:</strong> Combina dos modelos especializados en cascada para minimizar errores.
+          <strong>Sistema Dual:</strong> Combina dos modelos especializados en cascada para minimizar errores.
           <br><span id="dualConfigText"></span>
         </div>
       </div>
@@ -368,4 +377,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
