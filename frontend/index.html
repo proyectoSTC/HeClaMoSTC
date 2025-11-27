@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -182,12 +181,9 @@
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
+      0%, 100% {
         box-shadow: 0 4px 12px rgba(255, 107, 107, .4);
       }
-
       50% {
         box-shadow: 0 8px 24px rgba(255, 107, 107, .8);
       }
@@ -241,13 +237,8 @@
     }
 
     @keyframes spin {
-      0% {
-        transform: rotate(0)
-      }
-
-      100% {
-        transform: rotate(360deg)
-      }
+      0% { transform: rotate(0) }
+      100% { transform: rotate(360deg) }
     }
 
     .loading {
@@ -262,6 +253,35 @@
       border-radius: 8px;
       margin: 10px 0;
     }
+
+    .info-box {
+      background: #e7f3ff;
+      border-left: 4px solid #2196F3;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-size: 0.9em;
+      color: #333;
+    }
+
+    .confidence-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.85em;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .confidence-alta {
+      background: rgba(76, 175, 80, 0.3);
+      color: #2e7d32;
+    }
+
+    .confidence-media {
+      background: rgba(255, 152, 0, 0.3);
+      color: #e65100;
+    }
   </style>
 </head>
 
@@ -272,14 +292,35 @@
       <p class="subtitle">Sistema de Detección de Movimientos de Riesgo para Síndrome del Túnel Carpiano</p>
     </header>
 
+    <!-- Panel de Modo -->
+    <div class="panel">
+      <h2 class="panel-title">🔧 Modo de Clasificación</h2>
+      
+      <div class="control-group">
+        <label for="classificationMode">Seleccionar Modo:</label>
+        <select id="classificationMode">
+          <option value="">-- Seleccionar modo --</option>
+          <option value="single">Modelo Independiente</option>
+          <option value="dual">Sistema Dual (Recomendado) 🔥</option>
+        </select>
+      </div>
+
+      <div id="dualInfo" style="display:none;">
+        <div class="info-box">
+          <strong>🔥 Sistema Dual:</strong> Combina dos modelos especializados en cascada para minimizar errores.
+          <br><span id="dualConfigText"></span>
+        </div>
+      </div>
+    </div>
+
     <div class="grid-2">
       <!-- Panel de Modelo -->
-      <div class="panel">
+      <div class="panel" id="modelPanel">
         <h2 class="panel-title">🧠 Selección de Modelo</h2>
 
         <div class="control-group">
           <label for="modelType">Tipo de Modelo:</label>
-          <select id="modelType">
+          <select id="modelType" disabled>
             <option value="">-- Seleccionar tipo --</option>
             <option value="ml">Machine Learning (ML)</option>
             <option value="dl">Deep Learning (DL)</option>
@@ -299,7 +340,7 @@
         <h2 class="panel-title">📊 Señales de Prueba</h2>
 
         <div class="control-group">
-          <label>Señales disponibles (C:…\\test y subidas aquí):</label>
+          <label>Señales disponibles:</label>
           <div id="signalList" class="signal-list">
             <div class="loading">Cargando señales disponibles...</div>
           </div>
@@ -327,5 +368,4 @@
 
   <script src="app.js"></script>
 </body>
-
 </html>
