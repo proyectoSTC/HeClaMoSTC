@@ -434,49 +434,6 @@ Esta herramienta te permite:
 
 **Nota**: Este notebook es complementario y no es necesario para el funcionamiento de la aplicación principal. Úsalo para exploración y análisis de datos.
 
----
-
-## 🐛 Solución de Problemas
-
-### Error: "ModuleNotFoundError: No module named 'flask'"
-
-**Solución**: Instala las dependencias
-```bash
-pip install -r requirements.txt
-```
-
-### Error: "models/ no encontrado"
-
-**Solución**: Crea la carpeta y copia los modelos
-```bash
-mkdir models
-# Copia archivos .pkl, .keras, scaler.pkl, metadata.json
-```
-
-### Error: "Sistema Dual NO disponible"
-
-**Causa**: Falta `metadata.json` en `models/`
-
-**Solución**: 
-1. Entrena modelos con el notebook
-2. Descarga `metadata.json` de Google Drive
-3. Cópialo a la carpeta `models/`
-
-### Error al cargar modelos DL
-
-**Causa**: Modelos guardados en formato `.h5` antiguo
-
-**Solución**: Re-entrena con el notebook actualizado que guarda en `.keras`
-
-### Señales no aparecen en la lista
-
-**Solución**: 
-1. Verifica que los archivos sean `.mat`
-2. Actualiza la ruta `EXTERNAL_SIGNALS_DIR` en `server.py`
-3. O sube archivos usando el botón de carga
-
----
-
 ## 📈 Interpretación de Resultados
 
 ### Tarjetas de Resultados
@@ -497,34 +454,6 @@ Cada señal clasificada muestra:
 - **Recall**: De todos los RISK reales, cuántos detectamos
 - **F1-Score**: Balance entre precision y recall
 - **AUC**: Área bajo la curva ROC
-
----
-
-## 📚 Referencias Técnicas
-
-### Base de Datos
-
-- **Fuente**: Ninapro Database 2, Exercise 1
-- **Sujetos**: 40 personas sanas
-- **Movimientos**: 17 movimientos de mano/muñeca
-- **Repeticiones**: 6 por movimiento
-- **Canales**: 12 electrodos EMG
-
-### Pipeline de Procesamiento
-
-1. **Filtrado Butterworth**: Orden 4, pasa-banda 20-450 Hz
-2. **Filtro Notch**: IIR notch a 50 Hz, Q=30
-3. **Normalización**: Z-score independiente por canal
-4. **Segmentación**: Ventanas deslizantes 500ms, step 375ms
-
-### Arquitecturas DL
-
-Basadas en:
-- Attention mechanisms para redes neuronales
-- Combinación CNN-LSTM para series temporales
-- Técnicas de regularización (Dropout, L2, BatchNorm)
-
----
 
 ## 👥 Contribuciones
 
