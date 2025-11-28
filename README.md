@@ -268,7 +268,6 @@ El notebook ejecuta automáticamente:
    - Temporales: RMS, MAV, VAR, WL, SSC, ZC
    - Frecuenciales: MNF, MDF, PKF
    - Wavelet: Energía de coeficientes
-   - **Total**: 492 características (41 × 12 canales)
 7. **Entrenamiento**: 
    - ML con balanceo ADASYN/SMOTE
    - DL con Data Augmentation y/o Focal Loss
